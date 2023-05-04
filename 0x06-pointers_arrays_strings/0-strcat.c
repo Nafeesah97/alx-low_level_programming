@@ -2,14 +2,14 @@
 
 /**
  * _strcat - a function that concatenates two strings
- * Returns: a ponter to the resulting string
+ * Return: a ponter to the resulting string
  * @dest: string to be concacenated
  * @src: string to be concacenated
  */
 
 char *_strcat(char *dest, char *src)
 {
-	char* temp = dest;
+	char *temp = dest;
 
 	while (*dest)
 	{
@@ -18,7 +18,7 @@ char *_strcat(char *dest, char *src)
 	while (*src)
 	{
 		*dest++ = *src++;
-	}	
+	}
 	*dest = '\0';
-	return temp;
+	return (temp);
 }
