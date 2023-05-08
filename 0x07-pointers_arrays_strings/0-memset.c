@@ -20,6 +20,7 @@ int _strlen(char *str)
  * @s: string to be replaced
  * @b: srting to be replaced with
  * @n: the first byte to be replaced
+ * Return: string replaced
  */
 
 char *_memset(char *s, char b, unsigned int n)
