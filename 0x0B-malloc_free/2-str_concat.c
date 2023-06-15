@@ -29,17 +29,23 @@ int _len(char *s)
 
 char *str_concat(char *s1, char *s2)
 {
-	int len1, len2, i, j;
+	int len1, len2, i, j, l;
 	char *s;
-
-	if (s1 == NULL)
-		s1 = '\0';
-	if (s2 == NULL)
-		s2 = '\0';
+	
 	len1 = _len(s1);
 	len2 = _len(s2);
 	s = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
 	i = 0;
+	while (s1 == NULL)
+	{
+		s[i] = s2[i];
+		i++;
+	}
+	while (s2 == '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
 	if (s == NULL)
 	{
 		return (NULL);
