@@ -47,11 +47,11 @@ char *str_concat(char *s1, char *s2)
 	}
 	while (i < (len1 + len2))
 	{
-		if (i <= len1)
+		if (i < len1)
 		{
 			s[i] = s1[i];
 		}
-		if (i >= len1)
+		else
 		{
 			s[i] = s2[j];
 			j++;
