@@ -11,13 +11,20 @@ list_t *add_node(list_t **head, const char *str)
 {
 	struct list_s *p;
 
+	if (str == NULL)
+		return (NULL);
+
 	p = malloc(sizeof(struct list_s));
 	p->str = strdup(str);
 	p->next = NULL;
-	if (p == NULL)
-		return (0);
 
-	P->next = head;
-	head = p;
-	return (head);
+	if (p == NULL)
+	{
+		free(p);
+		return (NULL);
+	}
+
+	P->next = *head;
+	*head = p;
+	return (p);
 }
