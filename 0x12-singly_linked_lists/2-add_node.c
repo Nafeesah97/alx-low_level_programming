@@ -9,7 +9,7 @@
 
 list_t *add_node(list_t **head, const char *str)
 {
-	struct list_s *p, *h;
+	struct list_s *p;
 	size_t i;
 
 	if (str == NULL)
@@ -28,16 +28,15 @@ list_t *add_node(list_t **head, const char *str)
 		return (NULL);
 	}
 
+	i = 0;
+	while (p->str != NULL)
+	{
+		p->len = i;
+		i++;
+	}
+
 	p->next = *head;
 	*head = p;
 
-	i = 0;
-	h = *head;
-	while (h->str != NULL)
-	{
-		i++;
-		h = h->next;
-	}
-	p->len = i;
 	return (p);
 }
