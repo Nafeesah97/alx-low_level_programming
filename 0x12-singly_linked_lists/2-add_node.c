@@ -11,30 +11,32 @@ list_t *add_node(list_t **head, const char *str)
 {
 	struct list_s *p;
 	size_t i;
+	const char *temp;
 
 	if (str == NULL)
 		return (NULL);
+
+	i = 0;
+	temp = str;
+	while (temp != '\0')
+	{
+		i++;
+		temp++;
+	}
 
 	p = malloc(sizeof(struct list_s));
 	if (p == NULL)
 		return (NULL);
 
 	p->str = strdup(str);
-	p->next = NULL;
-
+	
 	if (p->str == NULL)
 	{
 		free(p);
 		return (NULL);
 	}
 
-	i = 0;
-	while (p->str != NULL)
-	{
-		p->len = i;
-		i++;
-	}
-
+	p->len = i;
 	p->next = *head;
 	*head = p;
 
