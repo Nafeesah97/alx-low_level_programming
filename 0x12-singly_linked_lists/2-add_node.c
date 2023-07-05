@@ -15,16 +15,19 @@ list_t *add_node(list_t **head, const char *str)
 		return (NULL);
 
 	p = malloc(sizeof(struct list_s));
+	if (p == NULL)
+		return (NULL);
+
 	p->str = strdup(str);
 	p->next = NULL;
 
-	if (p == NULL)
+	if (p->str == NULL)
 	{
 		free(p);
 		return (NULL);
 	}
 
-	P->next = *head;
+	p->next = *head;
 	*head = p;
 	return (p);
 }
