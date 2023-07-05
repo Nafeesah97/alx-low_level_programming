@@ -33,11 +33,11 @@ list_t *add_node(list_t **head, const char *str)
 
 	i = 0;
 	h = *head;
-	while (h != NULL)
+	while (h->str != NULL)
 	{
 		i++;
 		h = h->next;
 	}
-
-	return (i);
+	p->len = i;
+	return (p);
 }
