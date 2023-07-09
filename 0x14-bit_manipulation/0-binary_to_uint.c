@@ -11,8 +11,7 @@ unsigned int _pow(unsigned int base, unsigned int i)
 {
 	if (i == 0)
 		return (1);
-	if (i > 0)
-		return (base * _pow(base, i-1));
+	return (base * _pow(base, i-1));
 }
 
 /**
@@ -34,7 +33,7 @@ unsigned int binary_to_uint(const char *b)
 	{
 		if (b[i] != '0' && b[i] != '1')
 			return (0);
-		res += atoi(b[i]) * _pow(2, i);
+		res += (b[i] * _pow(2, i)) + (b[i] - '0');
 		i++;
 	}
 	return  (res);
