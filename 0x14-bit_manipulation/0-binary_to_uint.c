@@ -11,7 +11,7 @@ unsigned int _pow(unsigned int base, unsigned int i)
 {
 	if (i == 0)
 		return (1);
-	return (base * _pow(base, i-1));
+	return (base * _pow(base, i - 1));
 }
 
 /**
