@@ -23,16 +23,17 @@ int main(int argc, char *argv[])
 	int fp_from, fp_to, BUFFER_SIZE = 1024;
 	char *buffer;
 	ssize_t l_read, l_write;
+	int permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	if (argc != 3)
 		error_usage(argv);
-	fp_from = open (argv[1], O_RDONLY);
+	fp_from = open(argv[1], O_RDONLY);
 	if (fp_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	fp_to = open (argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	fp_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, permissions);
 	if (fp_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
