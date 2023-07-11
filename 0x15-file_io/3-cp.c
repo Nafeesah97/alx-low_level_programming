@@ -7,9 +7,10 @@
 
 void error_usage()
 {
-	dprintf(STDERR_FILENO, "Usage: cp file_from file_to");
+	dprintf(STDERR_FILENO, "Usage: cp %s %s\n", argv[1], argv[2]);
 	exit(97);
 }
+
 /**
  * main - main function
  * @argc: number of arguement
@@ -28,13 +29,13 @@ int main(int argc, char *argv[])
 	fp_from = open (argv[1], O_RDONLY);
 	if (fp_from == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 	fp_to = open (argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (fp_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s", argv[2]);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 	buffer = malloc(BUFFER_SIZE);
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
 		{
 			close(fp_from);
 			close(fp_to);
-			dprintf(STDERR_FILENO, "Error: Can't write to %s", argv[2]);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			exit(99);
 		}
 		l_read = read(fp_from, buffer, BUFFER_SIZE);
@@ -55,7 +56,7 @@ int main(int argc, char *argv[])
 	{
 		close(fp_from);
 		close(fp_to);
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 
