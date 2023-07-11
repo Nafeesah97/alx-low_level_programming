@@ -5,7 +5,7 @@
  * error_usage - if arg is more than 3, print error
  */
 
-void error_usage()
+void error_usage(char *argv[])
 {
 	dprintf(STDERR_FILENO, "Usage: cp %s %s\n", argv[1], argv[2]);
 	exit(97);
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	ssize_t l_read, l_write;
 
 	if (argc != 3)
-		error_usage();
+		error_usage(argv);
 	fp_from = open (argv[1], O_RDONLY);
 	if (fp_from == -1)
 	{
