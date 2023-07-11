@@ -19,11 +19,10 @@ void error_usage()
 
 int main(int argc, char *argv[])
 {
-	int fp_from, fp_to, BUFFER_SIZE;
-	char buffer[BUFFER_SIZE];
-	ssize_t l_read, l_write; 
+	int fp_from, fp_to, BUFFER_SIZE = 1024;
+	char *buffer;
+	ssize_t l_read, l_write;
 
-	BUFFER_SIZE = 1024;
 	if (argc != 3)
 		error_usage();
 	fp_from = open (argv[1], O_RDONLY);
@@ -49,6 +48,7 @@ int main(int argc, char *argv[])
 			dprintf(STDERR_FILENO, "Error: Can't write to %s", argv[2]);
 			exit(99);
 		}
+		l_read = read(fp_from, buffer, BUFFER_SIZE);
 	}
 	if (l_read == -1)
 	{
