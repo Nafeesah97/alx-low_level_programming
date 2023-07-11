@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't write to %s", argv[2]);
 		exit(99);
 	}
+	buffer = malloc(BUFFER_SIZE);
 	l_read = read(fp_from, buffer, BUFFER_SIZE);
 	while (l_read > 0)
 	{
@@ -68,6 +69,6 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fp_to);
 		exit(100);
 	}
-
+	free(buffer);
 	return (0);
 }
