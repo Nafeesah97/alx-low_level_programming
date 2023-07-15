@@ -24,49 +24,57 @@ int main(int argc, char *argv[])
 			write(STDOUT_FILENO, "$", n);
 		else
 			break;
-	}
-
-	buffer = malloc(n);
-	if (buffer == NULL)
-	{
-               	free(buffer);
-               	return 0;
-        }
-
-        line = getline(&buffer, &n, stdin);
-        if (line == -1)
-        {
-                free(buffer);
-                printf("error");
-		exit(EXIT_FAILURE);
-        }
-
-	token = strtok(buffer, delim);
-        while (token)
-        {
-                token = strtok(NULL, delim);
-        }
-
-	exec[0] = token;
-	exec[1] = NULL;
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		exit(EXIT_FAILURE);
-	}
-	else if ( child_pid == 0)
-	{
-		execve(exec[0], exec, NULL);
-		if (execve(exec[0], exec, NULL) == -1)
+		fflush(stdin);
+		if (fflush(stdin) == EOF)
 		{
-			perror("command not found");
 			exit(EXIT_FAILURE);
 		}
-	}
-	else
-	{
-		wait(&status);
-	}
+		
+		buffer = malloc(n);
+		if (buffer == NULL)
+		{
+               		free(buffer);
+	               	return 0;
+        	}
 
+	        line = getline(&buffer, &n, stdin);
+	        if (line == -1)
+        	{
+			if (feof(stdin))
+				exit(EXIT_SUCCESS);
+			else
+			{
+				free(buffer);
+				exit(EXIT_FAILURE);
+			}
+		}
+
+		token = strtok(buffer, delim);
+        	while (token)
+        	{
+                	token = strtok(NULL, delim);
+        	}
+
+		exec[0] = token;
+		exec[1] = NULL;
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			exit(EXIT_FAILURE);
+		}
+		else if ( child_pid == 0)
+		{
+			execve(exec[0], exec, NULL);
+			if (execve(exec[0], exec, NULL) == -1)
+			{
+				perror("command not found");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			wait(&status);
+		}
+	}
 	return (0);
 }
