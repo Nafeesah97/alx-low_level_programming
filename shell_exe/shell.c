@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	if (buffer == NULL)
 		return (1);
 
-	while (1)
+	while (mode_s)
 	{
 		mode_s = isatty(STDIN_FILENO);
 		if (mode_s == 1)
@@ -46,33 +46,31 @@ int main(int argc, char *argv[])
 			token = strtok(buffer, delim);
 	        	while (token)
 		 	{
-                		token = strtok(NULL, delim);
-        		}
-
-			exec[0] = token;
-			exec[1] = NULL;
-			child_pid = fork();
-			if (child_pid == -1)
-			{
-				exit(EXIT_FAILURE);
-			}
-			else if ( child_pid == 0)
-			{
-				if (execve(exec[0], exec, NULL) == -1)
+				exec[0] = token;
+				exec[1] = NULL;
+				child_pid = fork();
+				if (child_pid == -1)
 				{
-					perror("command not found");
 					exit(EXIT_FAILURE);
 				}
+				else if ( child_pid == 0)
+				{
+					if (execve(exec[0], exec, NULL) == -1)
+					{
+						perror("command not found");
+						exit(EXIT_FAILURE);
+					}
+				}
+				else
+				{
+					wait(&status);
+				}
+				token = strtok(NULL, delim);
 			}
-			else
-			{
-				wait(&status);
-			}
-			free(buffer);
 		}
 		else
 			break;
 	}
-
+	free(buffer);
 	return (0);
 }
