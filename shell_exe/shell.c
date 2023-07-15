@@ -13,9 +13,10 @@ int main(int argc, char *argv[])
 	ssize_t line;
         char *buffer = NULL;
 	char *delim = " ";
-	char *token;
+	char *token, *arg_copy;
 	char *exec[2];
 
+	arg_copy = strdup(argv[0]);
 	n = 1024;
 	while (1)
 	{
@@ -24,11 +25,6 @@ int main(int argc, char *argv[])
 			write(STDOUT_FILENO, "$", n);
 		else
 			break;
-		fflush(stdin);
-		if (fflush(stdin) == EOF)
-		{
-			exit(EXIT_FAILURE);
-		}
 		
 		buffer = malloc(n);
 		if (buffer == NULL)
@@ -41,7 +37,10 @@ int main(int argc, char *argv[])
 	        if (line == -1)
         	{
 			if (feof(stdin))
+			{
+				free(buffer);
 				exit(EXIT_SUCCESS);
+			}
 			else
 			{
 				free(buffer);
@@ -49,7 +48,7 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		token = strtok(buffer, delim);
+		token = strtok(arg_copy, delim);
         	while (token)
         	{
                 	token = strtok(NULL, delim);
@@ -64,7 +63,6 @@ int main(int argc, char *argv[])
 		}
 		else if ( child_pid == 0)
 		{
-			execve(exec[0], exec, NULL);
 			if (execve(exec[0], exec, NULL) == -1)
 			{
 				perror("command not found");
@@ -75,6 +73,7 @@ int main(int argc, char *argv[])
 		{
 			wait(&status);
 		}
+		free(buffer);
 	}
 	return (0);
 }
