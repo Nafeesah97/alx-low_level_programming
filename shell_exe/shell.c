@@ -17,6 +17,10 @@ int main(int argc, char *argv[])
 	char *exec[2];
 
 	n = 1024;
+	buffer = malloc(n);
+	if (buffer == NULL)
+		return (1);
+
 	while (1)
 	{
 		mode_s = isatty(STDIN_FILENO);
@@ -24,14 +28,7 @@ int main(int argc, char *argv[])
 		{
 			write(STDOUT_FILENO, "$", n);
 		
-			buffer = malloc(n);
-			if (buffer == NULL)
-			{
-               			free(buffer);
-		               	return 0;
-        		}
-
-		        line = getline(&buffer, &n, stdin);
+			line = getline(&buffer, &n, stdin);
 		        if (line == -1)
 	        	{
 				if (feof(stdin))
@@ -76,5 +73,6 @@ int main(int argc, char *argv[])
 		else
 			break;
 	}
+
 	return (0);
 }
