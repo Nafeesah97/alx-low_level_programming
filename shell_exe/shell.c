@@ -17,11 +17,13 @@ int main(int argc, char *argv[])
 	char *exec[2];
 
 	n = 1024;
-	while (mode_s)
+	while (1)
 	{
 		mode_s = isatty(STDIN_FILENO);
 		if (mode_s == 1)
 			write(STDOUT_FILENO, "$", n);
+		else
+			break;
 	}
 
 	buffer = malloc(n);
@@ -36,6 +38,7 @@ int main(int argc, char *argv[])
         {
                 free(buffer);
                 printf("error");
+		exit(EXIT_FAILURE);
         }
 
 	token = strtok(buffer, delim);
