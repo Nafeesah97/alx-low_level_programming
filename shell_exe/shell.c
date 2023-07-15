@@ -8,23 +8,27 @@
 int main(int argc, char *argv[])
 {
 	pid_t child_pid;
-	int status;
+	int status, mode_s;
 	size_t n;
 	ssize_t line;
         char *buffer = NULL;
 	char *delim = " ";
-	char *token, *arg_copy;
+	char *token;
 	char *exec[2];
 
-	arg_copy = strdup(argv[0]);
 	n = 1024;
-        printf("$");
+	while (mode_s)
+	{
+		mode_s = isatty(STDIN_FILENO);
+		if (mode_s == 1)
+			write(STDOUT_FILENO, "$", n);
+	}
 
-        buffer = malloc(n);
-        if (buffer == NULL)
-        {
-                free(buffer);
-                return 0;
+	buffer = malloc(n);
+	if (buffer == NULL)
+	{
+               	free(buffer);
+               	return 0;
         }
 
         line = getline(&buffer, &n, stdin);
@@ -34,7 +38,7 @@ int main(int argc, char *argv[])
                 printf("error");
         }
 
-	token = strtok(arg_copy, delim);
+	token = strtok(buffer, delim);
         while (token)
         {
                 token = strtok(NULL, delim);
