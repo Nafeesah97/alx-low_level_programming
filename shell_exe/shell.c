@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	int status, mode_s;
 	size_t n;
 	ssize_t line;
-        char *buffer = NULL;
+        char *buffer;
 	char *delim = " ";
 	char *token;
 	char *exec[2];
@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 		if (mode_s == 1)
 		{
 			write(STDOUT_FILENO, "$", n);
+			fflush(stdout);
 		
 			line = getline(&buffer, &n, stdin);
 		        if (line == -1)
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 				}
 			}
 
+			buffer[line - 1] = '\0';
 			token = strtok(buffer, delim);
 	        	while (token)
 		 	{
