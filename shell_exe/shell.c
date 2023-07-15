@@ -14,8 +14,9 @@ int main(int argc, char *argv[])
         char *buffer = NULL;
 	char *delim = " ";
 	char *token, *arg_copy;
+	char *exec[2];
 
-	arg_copy = strdup(argv);
+	arg_copy = strdup(argv[0]);
 	n = 1024;
         printf("$");
 
@@ -39,6 +40,8 @@ int main(int argc, char *argv[])
                 token = strtok(NULL, delim);
         }
 
+	exec[0] = token;
+	exec[1] = NULL;
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -46,8 +49,8 @@ int main(int argc, char *argv[])
 	}
 	else if ( child_pid == 0)
 	{
-		execve(token, &token, NULL);
-		if (execve(token, &token, NULL) == -1)
+		execve(exec[0], exec, NULL);
+		if (execve(exec[0], exec, NULL) == -1)
 		{
 			perror("command not found");
 			exit(EXIT_FAILURE);
