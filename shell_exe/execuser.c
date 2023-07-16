@@ -1,19 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "shell.h"
 
-void execute(char *buffer)
+void _exec(char *buffer)
 {
 	char *token;
 	char *delim = " ";
-	char *exec[2];
+	char **exec;
+	int exec_size = 2;
 	pid_t child_pid;
 	int status;
 
 	token = strtok(buffer, delim);
+	exec = malloc(sizeof(char *) * (exec_size));
 	while (token)
 	{
 		exec[0] = token;
@@ -21,6 +18,7 @@ void execute(char *buffer)
 		child_pid = fork();
 		if (child_pid == -1)
 		{
+			perror("fork");
 			exit(EXIT_FAILURE);
 		}
  		else if ( child_pid == 0)
@@ -38,4 +36,5 @@ void execute(char *buffer)
 		}
 		token = strtok(NULL, delim);
 	}
+	free(exec);
 }
