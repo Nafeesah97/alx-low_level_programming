@@ -8,7 +8,7 @@ int main(void)
 {
 	pid_t child_pid;
 	int i, status;
-	char *argv[] = {"ls -l /tmp", "/bin/ls", "-l", "/usr/", NULL};
+	char *argv[] = {"/bin/ls", "-l", "/tmp", NULL};
 
 	for (i = 0; i < 5; i++)
 	{

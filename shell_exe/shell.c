@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
 	pid_t child_pid;
-	int status, mode_s;
+	int status, mode_s = 1;
 	size_t n;
 	ssize_t line;
         char *buffer;
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		mode_s = isatty(STDIN_FILENO);
 		if (mode_s == 1)
 		{
-			write(STDOUT_FILENO, "$", n);
+			write(STDOUT_FILENO, "$", 1);
 			fflush(stdout);
 		
 			line = getline(&buffer, &n, stdin);
@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 	        	{
 				if (feof(stdin))
 				{
+					write(STDOUT_FILENO, "\n", 1);
 					free(buffer);
 					exit(EXIT_SUCCESS);
 				}
@@ -59,13 +60,14 @@ int main(int argc, char *argv[])
 				{
 					if (execve(exec[0], exec, NULL) == -1)
 					{
-						perror("command not found");
+						perror("./shell");
 						exit(EXIT_FAILURE);
 					}
 				}
 				else
 				{
 					wait(&status);
+					break;
 				}
 				token = strtok(NULL, delim);
 			}
