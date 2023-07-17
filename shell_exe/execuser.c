@@ -3,18 +3,24 @@
 void _exec(char *buffer)
 {
 	char *token;
-	char *delim = " ";
 	char **exec;
-	int exec_size = 2;
+	int exec_size, status;
+	int *tokenlen;
 	pid_t child_pid;
-	int status;
 
-	token = strtok(buffer, delim);
+	token = _tok(buffer, &tokenlen);
+	if (token == NULL)
+	{
+		perror("Token Error");
+		exit(EXIT_FAILURE);
+	}
+
+	exec_size = tokenlen + 1;
 	exec = malloc(sizeof(char *) * (exec_size));
 	while (token)
 	{
-		exec[0] = token;
-		exec[1] = NULL;
+		exec[tokenlen] = token;
+		exec[tokenlen + 1] = NULL;
 		child_pid = fork();
 		if (child_pid == -1)
 		{
