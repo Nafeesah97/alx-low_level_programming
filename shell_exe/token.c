@@ -4,36 +4,33 @@ int _strlen(char *str)
 {
         int count = 0;
 	
-	while (str)
+	while (*str != '\0')
 	{
 		count++;
+		str++;
 	}
 	return (count);
 }
 
-char **_tok(char *buffer, int *tokenlen)
+char *_tok(char *buffer)
 {       
         const char *delim = " ";
         int buflen;
 	int i;
-	char **result;
+	char *result = NULL;
 	char *token;
         
 	buflen = _strlen(buffer);
 	result = malloc(sizeof(char*) * buflen);
-	if (result == NULL)
-	{
-		*tokenlen = 0;
-		return (NULL);
-	}
+
 	i = 0;
 	token = strtok(buffer, delim);
 	while (token)
 	{
-		result[i] = token;
+		result[i] = *token;
 		i++;
+		token = strtok(NULL, delim);
 	}
-	token = strtok(NULL, delim);
-	*tokenlen = i;
+	result[i] = '\0';
 	return (result);
 }
