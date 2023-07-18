@@ -12,12 +12,12 @@ int _strlen(char *str)
 	return (count);
 }
 
-char *_tok(char *buffer)
-{       
-        const char *delim = " ";
-        int buflen;
+char **_tok(char *buffer)
+{
+	const char *delim = " ";
+	int buflen;
 	int i;
-	char *result = NULL;
+	char **result;
 	char *token;
         
 	buflen = _strlen(buffer);
@@ -27,10 +27,10 @@ char *_tok(char *buffer)
 	token = strtok(buffer, delim);
 	while (token)
 	{
-		result[i] = *token;
+		result[i] = strdup(token);
 		i++;
 		token = strtok(NULL, delim);
 	}
-	result[i] = '\0';
+	result[i] = NULL;
 	return (result);
 }

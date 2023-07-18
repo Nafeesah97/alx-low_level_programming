@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
         char *buffer;
         int mode_s = 1;
@@ -39,6 +39,7 @@ int main(int argc, char **argv)
                                         exit(EXIT_FAILURE);
                                 }
 			}
+			buffer[line - 1] = '\0';
 			_exec(buffer);
 		}
                 else
