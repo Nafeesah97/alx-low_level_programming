@@ -27,6 +27,16 @@ char **_tok(char *buffer, const char* delim)
 	while (token)
 	{
 		result[i] = strdup(token);
+		if (result[i] == NULL)
+		{
+			perror("Memory allocation error");
+			for (int j = 0; j < i; j++)
+			{
+				free(result[j]);
+			}
+			free(result);
+			exit(EXIT_FAILURE);
+		}
 		i++;
 		token = strtok(NULL, delim);
 	}
