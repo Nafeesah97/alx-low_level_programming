@@ -8,8 +8,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void _exec(char * buffer);
+extern char **environ;
+
+void _exec(char * buffer, char **token);
 int _strlen(char *str);
-char **_tok(char *buffer, int *tokenlen);
+char **_tok(char *buffer, const char* delim);
+char *_getenv(char* var);
+char *path_checker(char **token);
+char *command_path(char **token);
 
 #endif
