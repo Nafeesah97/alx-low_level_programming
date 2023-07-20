@@ -1,17 +1,9 @@
 #include "shell.h"
 
-void _exec(char *buffer)
+void _exec(char *pathfinder, char **token)
 {
-	char **token;
-	int status, i;
+	int status;
 	pid_t child_pid;
-
-	token = _tok(buffer);
-	if (token == NULL || token[0] == NULL)
-	{
-		perror("Invalid Command");
-		exit(EXIT_FAILURE);
-	}
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -21,7 +13,7 @@ void _exec(char *buffer)
 	}
  	else if ( child_pid == 0)
 	{
-		if (execve(token[0], token, NULL) == -1)
+		if (execve(pathfinder, token, NULL) == -1)
 		{
 			perror(token[0]);
 			exit(EXIT_FAILURE);
@@ -31,9 +23,4 @@ void _exec(char *buffer)
 	{
 		wait(&status);
 	}
-	for (i = 0; token[i] != NULL; i++)
-	{
-		free(token[i]);
-	}
-	free(token);
 }
