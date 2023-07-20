@@ -52,6 +52,7 @@ int main(int argc, char **argv)
 			if (pathfind != NULL)
 			{	
 				_exec(pathfind, token);
+				free(pathfind);
 			}
 			else
 			{

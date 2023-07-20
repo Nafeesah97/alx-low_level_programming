@@ -15,7 +15,7 @@ int _strlen(char *str)
 char **_tok(char *buffer, const char* delim)
 {
 	int buflen;
-	int i, j;
+	int i;
 	char **result;
 	char *token;
         
@@ -41,10 +41,5 @@ char **_tok(char *buffer, const char* delim)
                 exit(EXIT_SUCCESS);
         }
 	result[i] = NULL;
-	for (j = 0; result[j] != NULL; j++)
-	{
-                free(result[j]);
-        }
-        free(result);
-	return (result);
+        return (result);
 }

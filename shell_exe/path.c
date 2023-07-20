@@ -9,12 +9,34 @@ char *path_checker(char **token)
 	get_path = _getenv("PATH");
 	tok_path = _tok(get_path, ":");
 
+	full_path = NULL;
+
 	i = 0;
 	while (tok_path[i] != NULL)
 	{
-		full_path = strcat(strcat(tok_path[i], "/"), token[0]);
+		full_path = malloc(strlen(tok_path[i]) + strlen(token[0]) + 2);
+		if (full_path == NULL)
+		{
+			perror("Memory allocation error");
+			exit(EXIT_FAILURE);
+		}
+		strcpy(full_path, tok_path[i]);
+		strcat(full_path, "/");
+		strcat(full_path, token[0]);
+		if (access(full_path, X_OK) == 0)
+		{
+			break;
+		}
+		free(full_path);
+		full_path = NULL;
+
 		i++;
 	}
+	for (int j = 0; tok_path[j] != NULL; j++)
+	{
+		free(tok_path[j]);
+	}
+	free(tok_path);
 	return (full_path);
 }
 
