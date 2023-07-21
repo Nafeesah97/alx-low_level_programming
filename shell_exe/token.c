@@ -61,11 +61,6 @@ char **_tok(char *buffer, const char* delim)
                 exit(EXIT_FAILURE);
         }
 	result = temp;
-
-        if (strcmp(result[0], "exit") == 0)
-	{
-		exit(EXIT_SUCCESS);
-	}
 	result[i] = NULL;
         return (result);
 }

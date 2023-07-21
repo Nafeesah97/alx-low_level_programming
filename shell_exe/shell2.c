@@ -46,6 +46,12 @@ int main(int argc, char **argv)
 				free(buffer);
 				continue;
 			}
+			if (strcmp(buffer, "exit") == 0)
+			{
+				free(buffer);
+				exit(EXIT_SUCCESS);
+			}
+
 			buffer[line - 1] = '\0';
 			token = _tok(buffer, " ");
 			pathfind = command_path(token);
