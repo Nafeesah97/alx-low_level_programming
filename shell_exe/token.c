@@ -14,42 +14,58 @@ int _strlen(char *str)
 
 char **_tok(char *buffer, const char* delim)
 {
-	int buflen;
 	int i;
 	char **result;
 	char *token;
-        
-	buflen = _strlen(buffer);
-	result = malloc(sizeof(char*) * buflen);
+        int token_size;
+	char **temp;
 
 	i = 0;
-	token = strtok(buffer, delim);
-	while (token)
+	token_size = 16;
+	result = malloc(token_size * sizeof(char *));
+	if (result == NULL)
 	{
+		perror("Memoory allocation error");
+		exit(EXIT_FAILURE);
+	}
+
+	token = strtok(buffer, delim);
+	while (token != NULL)
+	{
+		if (i >= token_size)
+		{
+			token_size *= 2;
+			temp = realloc(result, token_size * sizeof(char *));
+			if (temp == NULL)
+			{
+				perror("Memory allocation error");
+				exit(EXIT_FAILURE);
+			}
+			result = temp;
+		}
 		result[i] = strdup(token);
 		if (result[i] == NULL)
 		{
 			perror("Memory allocation error");
-			for (int j = 0; j < i; j++)
-			{
-				free(result[j]);
-			}
-			free(result);
 			exit(EXIT_FAILURE);
 		}
 		i++;
 		token = strtok(NULL, delim);
+
 	}
-	if (result == NULL || result[0] == NULL)
+	temp = realloc(result, sizeof(char *) * (i + 1));
+	
+	if (temp == NULL)
         {
-                perror("Invalid Command");
+                perror("Memory allocation error");
                 exit(EXIT_FAILURE);
         }
+	result = temp;
+
         if (strcmp(result[0], "exit") == 0)
-        {
-                free(result);
-                exit(EXIT_SUCCESS);
-        }
+	{
+		exit(EXIT_SUCCESS);
+	}
 	result[i] = NULL;
         return (result);
 }

@@ -43,7 +43,7 @@ char *path_checker(char **token)
 
 char *command_path(char **token)
 {
-	char *com_path;
+	char *com_path = NULL;
 
 	if (strchr(token[0], '/') != NULL)
 	{
@@ -54,10 +54,7 @@ char *command_path(char **token)
 	}
 	else
 	{
-		if (access(path_checker(token), X_OK) == 0)
-		{
-			com_path = path_checker(token);
-		}
+		com_path = path_checker(token);
 	}
 	return (com_path);
 }
