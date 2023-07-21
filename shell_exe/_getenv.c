@@ -1,18 +1,27 @@
 #include "shell.h"
+#define PATH_MAX 32
 
 char *_getenv(char* var)
 {
 	char **env = environ;
 	size_t var_len = _strlen(var);
+	char *path;
 
+	path = malloc(sizeof(char *) * PATH_MAX);
+	if (path == NULL)
+	{
+		free(path);
+		exit(EXIT_FAILURE);
+	}
 	while (*env != NULL)
 	{
 		if (strncmp(*env, var, var_len) == 0 && (*env)[var_len] == '=') 
 		{
-			return (&(*env)[var_len + 1]);
+			path = &(*env)[var_len + 1];
 		}
 		env++;
 	}
 
-	return (NULL);
+	printf("%s\n", path);
+	return (path);
 }

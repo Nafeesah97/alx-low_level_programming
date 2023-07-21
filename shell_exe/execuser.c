@@ -2,10 +2,11 @@
 
 void _exec(char *pathfinder, char **token)
 {
-	int status;
-	pid_t child_pid;
+	pid_t child_pid, parent_pid;
 
 	child_pid = fork();
+	parent_pid = getppid();
+	printf("%u/%u\n", child_pid, parent_pid);
 	if (child_pid == -1)
 	{
 		perror("fork");
@@ -21,6 +22,6 @@ void _exec(char *pathfinder, char **token)
 	}
 	else
 	{
-		wait(&status);
+		wait(NULL);
 	}
 }

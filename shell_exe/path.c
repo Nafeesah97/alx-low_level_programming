@@ -7,8 +7,8 @@ char *path_checker(char **token)
 	int i;
 
 	get_path = _getenv("PATH");
+	printf("%s\n", get_path);
 	tok_path = _tok(get_path, ":");
-
 	full_path = NULL;
 
 	i = 0;
@@ -32,11 +32,17 @@ char *path_checker(char **token)
 
 		i++;
 	}
+
 	for (int j = 0; tok_path[j] != NULL; j++)
 	{
 		free(tok_path[j]);
 	}
 	free(tok_path);
+	if (full_path == NULL)
+	{
+		return (NULL);
+	}
+
 	return (full_path);
 }
 
@@ -55,6 +61,10 @@ char *command_path(char **token)
 	else
 	{
 		com_path = path_checker(token);
+	}
+	if (com_path == NULL)
+	{
+		return (NULL);
 	}
 	return (com_path);
 }
