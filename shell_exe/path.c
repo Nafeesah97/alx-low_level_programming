@@ -4,7 +4,7 @@ char *path_checker(char **token)
 {
 	char *full_path, *get_path;
 	char **tok_path;
-	int i;
+	int i, j;
 
 	get_path = _getenv("PATH");
 	printf("%s\n", get_path);
@@ -33,7 +33,7 @@ char *path_checker(char **token)
 		i++;
 	}
 
-	for (int j = 0; tok_path[j] != NULL; j++)
+	for (j = 0; tok_path[j] != NULL; j++)
 	{
 		free(tok_path[j]);
 	}
