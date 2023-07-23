@@ -7,7 +7,6 @@ char *path_checker(char **token)
 	int i, j;
 
 	get_path = _getenv("PATH");
-	printf("%s\n", get_path);
 	tok_path = _tok(get_path, ":");
 	full_path = NULL;
 

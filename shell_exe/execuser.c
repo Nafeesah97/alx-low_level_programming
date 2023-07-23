@@ -2,11 +2,9 @@
 
 void _exec(char *pathfinder, char **token)
 {
-	pid_t child_pid, parent_pid;
+	pid_t child_pid;
 
 	child_pid = fork();
-	parent_pid = getppid();
-	printf("%u/%u\n", child_pid, parent_pid);
 	if (child_pid == -1)
 	{
 		perror("fork");

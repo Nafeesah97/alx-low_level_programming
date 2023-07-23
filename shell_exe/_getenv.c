@@ -1,5 +1,4 @@
 #include "shell.h"
-#define PATH_MAX 32
 
 char *_getenv(char* var)
 {
@@ -22,7 +21,5 @@ char *_getenv(char* var)
 		}
 		env++;
 	}
-
-	printf("%s\n", path);
 	return (path);
 }
