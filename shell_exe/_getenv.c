@@ -16,7 +16,7 @@ char *_getenv(char* var)
 				perror("Memory allocation error");
 				exit(EXIT_FAILURE);
 			}
-			strcpy(path, *env + var_len + 1);
+			_strcpy(path, *env + var_len + 1);
 			break;
 		}
 		env++;

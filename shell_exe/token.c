@@ -43,7 +43,7 @@ char **_tok(char *buffer, const char* delim)
 			}
 			result = temp;
 		}
-		result[i] = strdup(token);
+		result[i] = _strdup(token);
 		if (result[i] == NULL)
 		{
 			perror("Memory allocation error");

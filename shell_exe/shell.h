@@ -27,5 +27,7 @@ char *_getenv(char* var);
 char *path_checker(char **token);
 char *command_path(char **token);
 void run(char *buffer, char *program);
+char *_strcpy(char *d, char *s);
+char *_strdup(char *s);
 
 #endif

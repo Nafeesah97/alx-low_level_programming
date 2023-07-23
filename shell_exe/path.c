@@ -19,7 +19,7 @@ char *path_checker(char **token)
 			perror("Memory allocation error");
 			exit(EXIT_FAILURE);
 		}
-		strcpy(full_path, tok_path[i]);
+		_strcpy(full_path, tok_path[i]);
 		strcat(full_path, "/");
 		strcat(full_path, token[0]);
 		if (access(full_path, X_OK) == 0)
@@ -54,7 +54,7 @@ char *command_path(char **token)
 	{
 		if (access(token[0], X_OK) == 0)
 		{
-			com_path = strdup(token[0]);
+			com_path = _strdup(token[0]);
 		}
 	}
 	else
