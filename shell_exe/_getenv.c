@@ -8,7 +8,7 @@ char *_getenv(char* var)
 
 	while (*env != NULL)
 	{
-		if (strncmp(*env, var, var_len) == 0 && (*env)[var_len] == '=') 
+		if (_strncmp(*env, var, var_len) == 0 && (*env)[var_len] == '=') 
 		{
 			path = malloc(_strlen(*env) - var_len);
 			if (path == NULL)

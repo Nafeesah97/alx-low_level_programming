@@ -21,7 +21,7 @@ int _builtin(char **tokens)
 
 	for (i = 0; actions[i].cmd; i++)
 	{
-		if (strcmp(actions[i].cmd, tokens[0]) == 0)
+		if (_strcmp(actions[i].cmd, tokens[0]) == 0)
 		{
 			return (actions[i].act());
 		}

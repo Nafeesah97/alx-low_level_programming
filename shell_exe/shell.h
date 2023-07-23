@@ -29,5 +29,9 @@ char *command_path(char **token);
 void run(char *buffer, char *program);
 char *_strcpy(char *d, char *s);
 char *_strdup(char *s);
-
+char *_strcat(char *d, char *s);
+int _strcmp(char *s1, char *s2);
+char *_strchr(char  *s, int c);
+int _strncmp(char *s1, char *s2, size_t n);
+	
 #endif

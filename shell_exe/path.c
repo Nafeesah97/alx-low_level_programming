@@ -13,22 +13,21 @@ char *path_checker(char **token)
 	i = 0;
 	while (tok_path[i] != NULL)
 	{
-		full_path = malloc(strlen(tok_path[i]) + strlen(token[0]) + 2);
+		full_path = malloc(_strlen(tok_path[i]) + _strlen(token[0]) + 2);
 		if (full_path == NULL)
 		{
-			perror("Memory allocation error");
+			perror("Memory allocation error for full path");
 			exit(EXIT_FAILURE);
 		}
 		_strcpy(full_path, tok_path[i]);
-		strcat(full_path, "/");
-		strcat(full_path, token[0]);
+		_strcat(full_path, "/");
+		_strcat(full_path, token[0]);
 		if (access(full_path, X_OK) == 0)
 		{
 			break;
 		}
 		free(full_path);
 		full_path = NULL;
-
 		i++;
 	}
 
@@ -50,7 +49,7 @@ char *command_path(char **token)
 {
 	char *com_path = NULL;
 
-	if (strchr(token[0], '/') != NULL)
+	if (_strchr(token[0], '/') != NULL)
 	{
 		if (access(token[0], X_OK) == 0)
 		{

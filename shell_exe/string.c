@@ -46,4 +46,62 @@ char *_strdup(char *s)
 	return (res);
 }
 
+char *_strchr(char  *s, int c)
+{
+	while (*s != '\0')
+	{
+		if (*s == c)
+			return (s);
+		s++;
+	}
+	return (NULL);
+}
 
+int _strcmp(char *s1, char *s2)
+{
+	while (*s1 == *s2)
+	{
+		if (*s1 == '\0')
+			return (0);
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
+char *_strcat(char *d, char *s)
+{
+	char *original_dest = d;
+
+	while (*d != '\0')
+	{
+		d++;
+	}
+	while (*s != '\0')
+	{
+		*d = *s;
+		d++;
+		s++;
+	}
+	*d = '\0';
+	return (original_dest);
+}
+
+int _strncmp(char *s1, char *s2, size_t n)
+{
+	while (n > 0 && *s1 == *s2)
+	{
+		if (*s1 == '\0')
+		{
+			return (0);
+		}
+		s1++;
+		s2++;
+		n--;
+	}
+	if (n == 0)
+	{
+		return (0);
+	}
+	return (*s1 - *s2);
+}

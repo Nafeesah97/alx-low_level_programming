@@ -13,7 +13,7 @@ void run(char *prompt, char *program)
         buffer = malloc(n);
         if (buffer == NULL)
 	{
-                perror("Failure allocating space for malloc");
+                perror("Failure allocating space for buffer");
 		exit(EXIT_FAILURE);
 	}
 
@@ -61,5 +61,6 @@ void run(char *prompt, char *program)
 			}
 		}
 	}
+	free(token);
 	free(buffer);
 }
