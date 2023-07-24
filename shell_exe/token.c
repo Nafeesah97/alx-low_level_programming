@@ -22,7 +22,7 @@ char **_tok(char *buffer, const char* delim)
 
 	i = 0;
 	token_size = 8;
-	result = malloc((token_size + 1) * sizeof(char *));
+	result = malloc((token_size) * sizeof(char *));
 	if (result == NULL)
 	{
 		perror("Memoory allocation error for result");
