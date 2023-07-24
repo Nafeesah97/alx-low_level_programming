@@ -2,7 +2,6 @@
 
 void _exec(char *pathfinder, char **token)
 {
-	int status;
 	pid_t child_pid;
 
 	child_pid = fork();
@@ -21,6 +20,6 @@ void _exec(char *pathfinder, char **token)
 	}
 	else
 	{
-		wait(&status);
+		wait(NULL);
 	}
 }
