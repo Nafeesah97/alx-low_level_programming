@@ -14,14 +14,14 @@ int _strlen(char *str)
 
 char **_tok(char *buffer, const char* delim)
 {
-	int i;
+	size_t i;
 	char **result;
 	char *token;
         size_t token_size;
 	char **temp;
 
 	i = 0;
-	token_size = 8
+	token_size = 8;
 	result = malloc((token_size + 1) * sizeof(char *));
 	if (result == NULL)
 	{

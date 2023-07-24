@@ -24,7 +24,7 @@ char *_getenv(char* var)
 	return (path);
 }
 
-int *_realloc(void *p, size_t size)
+void *_realloc(void *p, size_t size)
 {
 	void *n_ptr;
 	size_t o, n, i;

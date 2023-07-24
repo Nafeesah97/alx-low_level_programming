@@ -7,8 +7,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <malloc.h>
 
 #define UNUSED_VAR(var) ((void)(var))
+
 
 extern char **environ;
 
@@ -33,6 +35,6 @@ char *_strcat(char *d, char *s);
 int _strcmp(char *s1, char *s2);
 char *_strchr(char  *s, int c);
 int _strncmp(char *s1, char *s2, size_t n);
-int *_realloc(void *p, size_t size);
+void *_realloc(void *p, size_t size);
 
 #endif
