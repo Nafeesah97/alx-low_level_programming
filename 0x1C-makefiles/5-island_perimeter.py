@@ -8,7 +8,7 @@ def island_perimeter(grid):
             if grid[i][j] == 1:
                 if grid[i][j - 1] == 0:
                     p += 1
-                if grid[i -1][j] == 0:
+                if grid[i - 1][j] == 0:
                     p += 1
                 if grid[i][j + 1] == 0:
                     p += 1
